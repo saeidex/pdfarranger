@@ -1,0 +1,25 @@
+[package]
+name = "pdfarranger"
+version = "1.13.0"
+edition = "2021"
+description = "A small application which helps the user to merge or split PDF documents and rotate, crop and rearrange their pages"
+license = "GPL-3.0-or-later"
+homepage = "https://github.com/pdfarranger/pdfarranger"
+repository = "https://github.com/pdfarranger/pdfarranger"
+keywords = ["pdf", "merge", "split", "rotate", "arrange"]
+
+[[bin]]
+name = "pdfarranger"
+path = "src/main.rs"
+
+[lib]
+name = "pdfarranger"
+path = "src/lib.rs"
+
+[dependencies]
+lopdf = "0.40.0"
+clap = { version = "4.6.0", features = ["derive"] }
+thiserror = "2.0.12"
+
+[dev-dependencies]
+tempfile = "3.19.1"
