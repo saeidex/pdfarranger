@@ -14,17 +14,25 @@
 // with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-//! PDF Arranger — core library for PDF manipulation in Rust.
+//! Entry point for the `pdfarranger-gui` binary.
 //!
-//! Provides operations to merge, split, rotate, crop, delete and reorder pages
-//! of PDF documents.
+//! Usage:
+//! ```text
+//! pdfarranger-gui [PDF_FILE...]
+//! ```
 //!
-//! Enable the **`gui`** Cargo feature to also compile the GTK3 graphical
-//! interface (`pdfarranger::gui`).
+//! Any PDF files passed on the command line are pre-loaded into the application
+//! on start-up.
 
-pub mod core;
+use std::path::PathBuf;
 
-#[cfg(feature = "gui")]
-pub mod gui;
+fn main() {
+    // Collect optional PDF file arguments (skip argv[0]).
+    let files: Vec<PathBuf> = std::env::args_os()
+        .skip(1)
+        .map(PathBuf::from)
+        .collect();
 
-pub use core::{PdfError, PdfDocument};
+    let exit_code = pdfarranger::gui::run(files);
+    std::process::exit(exit_code.into());
+}
