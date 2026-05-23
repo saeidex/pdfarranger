@@ -1,0 +1,36 @@
+[package]
+name = "pdfarranger"
+version = "1.13.0"
+edition = "2021"
+description = "A small application which helps the user to merge or split PDF documents and rotate, crop and rearrange their pages"
+license = "GPL-3.0-or-later"
+homepage = "https://github.com/pdfarranger/pdfarranger"
+repository = "https://github.com/pdfarranger/pdfarranger"
+keywords = ["pdf", "merge", "split", "rotate", "arrange"]
+
+[[bin]]
+name = "pdfarranger"
+path = "src/main.rs"
+
+[[bin]]
+name = "pdfarranger-gui"
+path = "src/gui_main.rs"
+required-features = ["gui"]
+
+[lib]
+name = "pdfarranger"
+path = "src/lib.rs"
+
+[features]
+gui = ["gtk/v3_24", "glib", "gio"]
+
+[dependencies]
+lopdf = "0.40.0"
+clap = { version = "4.6.0", features = ["derive"] }
+thiserror = "2.0.12"
+gtk = { version = "0.18.2", optional = true }
+glib = { version = "0.18.5", optional = true }
+gio = { version = "0.18.4", optional = true }
+
+[dev-dependencies]
+tempfile = "3.19.1"

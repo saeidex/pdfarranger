@@ -3,3 +3,4 @@ venv/
 tests/exporter/out.pdf
 build/
 pdfarranger.egg-info/
+target/
